@@ -1,2 +1,32 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
 {% block content %}
+{% include 'layouts/partials/nav.html' %}
+
+{% include 'layouts/partials/addProduct.html' %}
+
+<h1 class="text-center mb-5">Products</h1>
+{% for product in products %}
+    <div class="card mb-3 mx-md-5" style="width: 50%;">
+        <div class="row g-0">
+            <div class="col-md-0 ml-4 d-flex align-items-center">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-thumbnail" style="width: 200px; height: 200px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body" style="margin-top: 10px;">
+                    <h3 class="card-title">{{ product.name }}</h3>
+                    <p class="card-text">Price: US${{ product.price }}</p>
+                    <p class="card-text">State: {{ product.get_state_display }}</p>
+                    <button class="btn btn-primary" style="margin-top: 0px;">See Product</button>
+                    <a href="{% url 'deleteProduct' product.id %}" class="btn btn-danger">Borrar tarea</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
 {% endblock %}
