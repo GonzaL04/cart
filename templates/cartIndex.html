@@ -1,13 +1,10 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
-
 
 {% block content %}
 {% include 'layouts/partials/nav.html' %}
 
-{% include 'layouts/partials/addProduct.html' %}
 
-<h1 class="text-center mb-5">Products</h1>
+<h1 class="text-center mt-5">Cart</h1>
 {% for product in products %}
     <div class="card mb-3 mx-md-5" style="width: 50%;">
         <div class="row g-0">
@@ -16,14 +13,13 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body" style="margin-top: 10px;">
-                    <h3 class="card-title">{{ product.name }}</h3>
+                    <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">Price: US${{ product.price }}</p>
                     <p class="card-text">State: {{ product.get_state_display }}</p>
-                    <a class="btn btn-primary" style="margin-top: 0px;" data-toggle="modal" data-target="#productModal{{ product.id }}">See Product</a>
-                    {% include 'layouts/partials/seeProduct.html' %}
-                    <button type="button" class="btn btn-secondary edit-product-btn" data-toggle="modal" data-target="#editProductModal{{ product.id }}">Edit product</button>
-                    {% include 'layouts/partials/editProduct.html' %}
-                    <a href="{% url 'deleteProduct' product.id %}" class="btn btn-danger">Delete Product</a>
+                    <form method="POST" action="{% url 'removeFromCart' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Remove from cart</button>
+                    </form>
                 </div>
             </div>
         </div>

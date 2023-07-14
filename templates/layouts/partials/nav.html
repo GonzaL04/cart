@@ -1,9 +1,10 @@
+{% load static %}
 <nav class="navbar navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">CartApp</a>
+        <a class="navbar-brand" href="{% url 'Products' %}">CartApp</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-            <a class="nav-link" href="#">See Cart</a>
+                <a class="nav-link" href="{% url 'cartIndex' %}">See Cart</a>
             </li>
         </ul>
     </div>
